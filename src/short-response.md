@@ -1,6 +1,7 @@
 # Short Responses
 
 For this assessment, aim to write a response with the following qualities:
+
 - [ ] Addresses all parts of the prompt
 - [ ] Accurately uses relevant technical terminology
 - [ ] Is free of grammar and spelling mistakes
@@ -26,7 +27,7 @@ const getLetterGrade = (score) => {
   }
 
   return "Your grade is: " + letter;
-}
+};
 
 console.log(getLetterGrade(95)); // This should print "Your grade is: A"
 console.log(getLetterGrade(82)); // This should print "Your grade is: B"
@@ -42,11 +43,11 @@ console.log(getLetterGrade(65)); // This should print "Your grade is: F"
 
 **Part A:**
 
-Your response...
+The problem is that the variable `letter` has **function scope** and, inside each if-else blocks, the `letter` variable is declared with `let`, so each one now has **block scope**. Variables declared with `let` (or `const`) only exist within the execution context in which they were declared. Therefore, by the time the if-else statements finish executing, the **function-scoped** `letter` variable has never been assigned a value. As a result, the said `letter` variable is automatically assigned to `undefined`.
 
 **Part B:**
 
-Your response...
+To fix this, instead of declaring a new `letter` variable within the if-else blocks, I would only assign them to their respective letter grade. We only need to declare the **function-scoped** `letter` variable.
 
 ---
 
@@ -69,18 +70,18 @@ console.log(originalSettings.volume);
 
 **Part A:**
 
-Your response...
+`75` will be logged to the console. This happens because `newSettings` is being assigned the reference to `originalSettings` (**shallow copy**), and now both are pointing to the same reference in the **heap**. Therefore, if `newSettings` makes any changes to the `volume` property, it will also affect `originalSettings.volume`.
 
 **Part B:**
 
-Your response...
+Instead of passing a **shallow copy**, I would pass a **deep copy** by using the **spread operator** syntax. This way, `newSettings` and `originalSettings` will be pointing to a unique memory location in the **heap**.
 
 **Corrected Code:**
 
 ```js
 // Fix this code so newSettings is a true copy
 const originalSettings = { volume: 50, brightness: 80 };
-const newSettings = originalSettings;
+const newSettings = { ...originalSettings };
 newSettings.volume = 75;
 console.log(originalSettings.volume);
 ```
@@ -90,6 +91,7 @@ console.log(originalSettings.volume);
 ## Prompt 3
 
 Given this array of products and the code using `filter`:
+
 ```js
 const products = [
   { name: "Laptop", price: 1000, inStock: true },
@@ -99,15 +101,16 @@ const products = [
 ];
 
 const itemsInStock = products.filter((product) => {
-  return product.inStock
+  return product.inStock;
 });
 ```
 
 Walk through what happens in the first iteration of filter:
+
 - What is the value of `product`?
 - What gets returned from the callback?
 - What happens with that returned value?
 
 ### Response 3
 
-Your response...
+During the first iteration, the value of `product` is assigned the first element in the array: `products[0]` (`{ name: "Laptop", price: 1000, inStock: true }`). Then, `product` accesses the `inStock` property and checks if the product is in stock (if its value is `true`). If it is, the object-element is returned and added to the new array that `filter` will later return.
